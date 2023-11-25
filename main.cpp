@@ -94,6 +94,7 @@ public:
         if (x == 1780 && y == 55) { mission.loadFromFile("run turnaround-Sheet.png"); }
     }
     float X() {
+        //std::cout << x << " " << y << "\n";
         return x;
     }
     float Y() {
@@ -150,19 +151,29 @@ int main()
 
             if (event.type == sf::Event::Closed)
                 window.close();
-            
-            
-        }
-        p.controll(time);
-        p.update(time);   
-        window.clear();
-        
-        window.draw(map.sprite);
 
-        if (p.X() >= 1700 && p.X() <= 1800 && p.Y() >= 10 && p.Y() <= 40)
+
+
+        }
+        FloatRect sopriteBones = p.sprite.getGlobalBounds();
+        FloatRect sopriterestagle = shape.getGlobalBounds();
+        FloatRect sopriterestagle1 = sprite2.getGlobalBounds();
+        FloatRect sopriterestagle2 = sprite.getGlobalBounds();
+        p.controll(time);
+        p.update(time);
+        window.clear();
+        window.draw(map.sprite);
+        if (sopriteBones.intersects(sopriterestagle)) { window.draw(smission); }
+        if (sopriteBones.intersects(sopriterestagle1)) { window.draw(smission); }
+        if (sopriteBones.intersects(sopriterestagle2)) { window.draw(smission); }
+          /*  if (p.X() >= 1700 && p.X() <= 1800 && p.Y() >= -60 && p.Y() <= 40)
+            {
+                window.draw(smission);
+            }
+        if (p.X() >= 450 && p.X() <= 500 && p.Y() >= 400 && p.Y() <= 500)
         {
             window.draw(smission);
-        }
+        }*/
         window.draw(shape);
         window.draw(sprite2);
         window.draw(sprite);
