@@ -36,12 +36,12 @@ public:
     Player()
     {
         dx = 0; dy = 0; speed = 0;
-        image.loadFromFile("Archer_Idle_1.png");
+        image.loadFromFile("pngwing.com.png");
         texture.loadFromImage(image);
         sprite.setTexture(texture);
-        sprite.setTextureRect(IntRect(0, 0, 50, 40));
+     //   sprite.setTextureRect(IntRect(0, 0, 50, 40));
         sprite.setPosition(500, 500);
-        sprite.scale(5.0f, 5.0f);
+        sprite.scale(0.1f, 0.1f);
     }
     void controll(float time)
     {
@@ -87,11 +87,6 @@ public:
         speed = 0;
         sprite.setPosition(x, y);
         view.setCenter(x, y);
-        Image mission;
-        if (x >= 1700 && x <= 1800 && y >= 45 && y <= 60) { mission.loadFromFile("run turnaround-Sheet.png"); }
-        if (x == 1780 && y == 55) { mission.loadFromFile("run turnaround-Sheet.png"); }
-        if (x == 1780 && y == 55) { mission.loadFromFile("run turnaround-Sheet.png"); }
-        if (x == 1780 && y == 55) { mission.loadFromFile("run turnaround-Sheet.png"); }
     }
     float X() {
         //std::cout << x << " " << y << "\n";
@@ -118,17 +113,14 @@ int main()
     tile1.loadFromFile("парк патриот.png");
     texture.loadFromImage(tile1);
     sprite.setTexture(texture);
-    sprite.setPosition(350, 550);
-    sprite.scale(0.3f, 0.3f);
+    sprite.setPosition(550, 800);
+    sprite.scale(0.1f, 0.1f);
 
     Texture tmission;
+    tmission.loadFromFile("novat.png");
     Image imission;
     Sprite smission;
-    imission.loadFromFile("run turnaround-Sheet.png");
-    tmission.loadFromImage(imission);
-    smission.setTexture(tmission);
     smission.setPosition(500, 500);
-    smission.scale(5.0f, 5.0f);
 
 
     Image tile2;
@@ -139,7 +131,6 @@ int main()
     sprite2.setTexture(texture2);
     sprite2.setPosition(830, 1300);
     sprite2.scale(0.1f, 0.1f);
-    sprite2.rotate(-5.f);
     while (window.isOpen())
     {
         float time = clock.getElapsedTime().asMicroseconds();
@@ -163,17 +154,9 @@ int main()
         p.update(time);
         window.clear();
         window.draw(map.sprite);
-        if (sopriteBones.intersects(sopriterestagle)) { window.draw(smission); }
-        if (sopriteBones.intersects(sopriterestagle1)) { window.draw(smission); }
-        if (sopriteBones.intersects(sopriterestagle2)) { window.draw(smission); }
-          /*  if (p.X() >= 1700 && p.X() <= 1800 && p.Y() >= -60 && p.Y() <= 40)
-            {
-                window.draw(smission);
-            }
-        if (p.X() >= 450 && p.X() <= 500 && p.Y() >= 400 && p.Y() <= 500)
-        {
-            window.draw(smission);
-        }*/
+        if (sopriteBones.intersects(sopriterestagle)) { smission.setPosition(500, 500); smission.setTexture(tmission); window.draw(smission); }
+        if (sopriteBones.intersects(sopriterestagle1)) { smission.setPosition(200, 500); smission.setTexture(texture2);smission.scale(1.f, 1.f); window.draw(smission); }
+        if (sopriteBones.intersects(sopriterestagle2)) { smission.setPosition(500, 400); smission.setTexture(texture); smission.scale(1.f, 1.f); window.draw(smission); }
         window.draw(shape);
         window.draw(sprite2);
         window.draw(sprite);
